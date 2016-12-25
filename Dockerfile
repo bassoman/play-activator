@@ -1,5 +1,4 @@
 FROM ikovacevic/java:oracle-jdk-8
-
 MAINTAINER Jon Lancelle <bassoman@gmail.com>
 
 RUN apt-get update && apt-get install -y curl wget unzip iputils-ping vim
