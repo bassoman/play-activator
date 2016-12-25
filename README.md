@@ -1,2 +1,1 @@
-# play-activator
-JDK 8, sbt, activator
+Dockerfile for image with Typesafe (Lightbend) Activator
