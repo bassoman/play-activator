@@ -26,5 +26,5 @@ RUN apt-get update \
   && apt-get install -y g++ make git \
   && apt-get clean
 
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
 RUN apt-get install -y nodejs && apt-get clean
