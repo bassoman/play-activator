@@ -1,2 +1,2 @@
 # play-activator
-JDK 8, sbt, activator
+Working a few competing branches. And the winner is...
