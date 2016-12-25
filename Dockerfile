@@ -1,30 +1,13 @@
-FROM ikovacevic/java:oracle-jdk-8
+FROM ingensi/oracle-jdk
+MAINTAINER Ingensi labs <contact@ingensi.com>
 
-MAINTAINER Jon Lancelle <bassoman@gmail.com>
+RUN yum update -y && yum install -y unzip
+RUN curl -O http://downloads.typesafe.com/typesafe-activator/1.3.6/typesafe-activator-1.3.6.zip 
+RUN unzip typesafe-activator-1.3.6.zip -d / && rm typesafe-activator-1.3.6.zip && chmod a+x /activator-1.3.6/activator
+ENV PATH $PATH:/activator-1.3.6
 
-RUN apt-get update && apt-get install -y curl wget unzip iputils-ping vim
+EXPOSE 9000 8888
+RUN mkdir /app
+WORKDIR /app
 
-ENV DEBIAN_FRONTEND noninteractive
-
-ENV ACTIVATOR_VERSION 1.3.10
-
-ENV ACTIVATOR_HOME /usr/local/activator
-
-RUN \
-  cd /tmp && \
-  wget http://downloads.typesafe.com/typesafe-activator/$ACTIVATOR_VERSION/typesafe-activator-$ACTIVATOR_VERSION.zip && \
-  unzip typesafe-activator-$ACTIVATOR_VERSION.zip -d /usr/local && \
-  ln -s /usr/local/activator-dist-$ACTIVATOR_VERSION /usr/local/activator && \
-  ln -s /usr/local/activator/bin/activator /usr/local/bin/ && \
-  rm typesafe-activator-$ACTIVATOR_VERSION.zip
-
-RUN apt-get update \
-  && apt-get install -y python-software-properties python \
-  && apt-get clean
-
-RUN apt-get update \
-  && apt-get install -y g++ make git \
-  && apt-get clean
-
-RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
-RUN apt-get install -y nodejs && apt-get clean
+CMD ["activator", "run"]
